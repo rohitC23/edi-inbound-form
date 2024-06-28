@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDI 204 Inbound form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">EDI 204 Inbound form</div>
+            <div class="description"></div>
+        </div>
+
+        <div id="uploadSection">
+            <input type="file" id="uploadButton">
+            <label for="uploadButton" id="uploadLabel">Choose File (No file chosen)</label>
+            <h5>or</h5>
+            <button id="continueDefaultTemplate" class="default-btn">Continue with Default Template</button>
+        </div>
+
+        <div id="tabsSection" style="display: none;">
+            <div class="tabs">
+                <button class="tablinks" id="generalTabLink" onclick="openTab(event, 'General')">General</button>
+                <button class="tablinks" onclick="openTab(event, 'Equipment')">Equipment</button>
+                <button class="tablinks" onclick="openTab(event, 'Load')">Load References</button>
+                <button class="tablinks" onclick="openTab(event, 'Stop')">Stop</button>
+                <button class="tablinks" onclick="openTab(event, 'Summary')">Summary</button>
+            </div>
+            <div id="General" class="tabcontent">
+                <form id="feedbackFormGeneral"></form>
+                <button type="button" class="next-btn">Next</button>
+            </div>            
+            <div id="Equipment" class="tabcontent">
+                <form id="feedbackFormEquipment"></form>
+                <button type="button" class="next-btn">Next</button>
+            </div>
+            <div id="Load" class="tabcontent">
+                <form id="feedbackFormLoad"></form>
+                <button type="button" class="next-btn">Next</button>
+            </div>
+            <div id="Stop" class="tabcontent">
+                <form id="feedbackFormStop"></form>
+                <button type="button" class="next-btn">Next</button>
+            </div>
+            <div id="Summary" class="tabcontent">
+                <h3>Summary</h3>
+                <p>Preview of your responses</p>
+                <div class="button-container">
+                    <button type="button" id="save-btn" class="submit-btn">Save</button>
+                    <button id="previewButton" class="submit-btn">Preview</button>
+                </div>
+            </div>            
+        </div>
+        <div id="previewSection" style="display: none;">
+            <h3 id="preview-title">Preview</h3>
+            <pre id="previewContent"></pre>
+            <button id="backButton">Back</button>
+            <button id="download-btn">Download</button>
+            <h4 id="thankyou-msg" style="display: none;">Thanks for downloading the file, you're now safe to close the window</h4>
+        </div>
+    </div>
+    <script src="forms.js"></script>
+</body>
+</html>
