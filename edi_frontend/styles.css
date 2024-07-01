@@ -1,6 +1,6 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f3e5f5;
+  font-family: Inter, sans-serif;
+  background-color: #051B4C;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,7 @@ body {
 .title {
   font-size: 24px;
   font-weight: bold;
-  color: #5e35b1;
+  color: #051B4C;
   margin-bottom: 5px;
 }
 .description {
@@ -33,7 +33,9 @@ body {
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 8px;
-  background-color: #f3f3f3;
+  font-weight: bold;
+  color: #051B4C;
+  border: 1px solid #ccc;
 }
 .question label {
   display: block;
@@ -43,18 +45,37 @@ body {
 .radio-group {
   display: flex;
   flex-direction: column;
+  font-weight: normal;
+  color: #051b4cbf;
 }
+
+.radio-group input[type="radio"] {
+  appearance: none;
+  padding: 5px;
+  margin-right: 5px;
+  border: 2px solid #38A70Cbf;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-group input[type="radio"]:checked {
+  background-color: #38A70C;
+}
+
 .radio-group label {
   margin-bottom: 4px;
 }
 .submit-btn {
   display: block;
-  width:80px;
-  padding: 10px;
-  background-color: #5e35b1;
+  width:180px;
+  padding: 9px 20px;
+  background-color: #38A70C;
+  font-weight: bold;
+  font-family: Inter, sans-serif;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 60px;
   cursor: pointer;
   font-size: 16px;
   margin-bottom: 10px;
@@ -66,17 +87,19 @@ body {
   gap: 10px; /* Adjust the gap between buttons as needed */
 }
 
-.submit-btn:hover {
-  background-color: #452c87;
-}
+/* .submit-btn:hover {
+  background-color: #051B4C;
+} */
 .next-btn {
   display: block;
   width:80px;
-  padding: 10px;
-  background-color: #5e35b1;
+  padding: 9px 20px;
+  background-color: #38A70C;
+  font-weight: bold;
+  font-family: Inter, sans-serif;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 60px;
   cursor: pointer;
   font-size: 16px;
   margin: 20px auto; /* This centers the button horizontally */
@@ -88,9 +111,9 @@ body {
   align-items: center; /* This centers the button horizontally */
 }
 
-.next-btn:hover{
-  background-color: #452c87;
-}
+/* .next-btn:hover{
+  background-color: #051B4C;
+} */
 #previewButton{
   display: none;
   width:80px;
@@ -106,27 +129,31 @@ body {
   background-color: #452c87;
 }
 #backButton{
-  padding: 10px;
-  background-color: #5e35b1;
+  padding: 9px 20px;
+  background-color: #38A70C;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 60px;
   cursor: pointer;
   font-size: 16px;
+  font-family: Inter, sans-serif;
+  font-weight: bold;
 }
 #download-btn{
-  padding: 10px;
-  background-color: #5e35b1;
+  padding: 9px 20px;
+  background-color: #38A70C;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 60px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
+  font-family: Inter, sans-serif;
 }
 #uploadSection{
   display: block;
   padding: 10px;
-  background-color: #5e35b1;
+  background-color: #051B4C;
   color: white;
   border: none;
   border-radius: 4px;
@@ -135,18 +162,8 @@ body {
 }
 /* General container styling */
 .container {
-  width: 95%;
+  width: 80%;
   margin: auto;
-}
-
-/* Header styling */
-.header .title {
-  font-size: 2em;
-  margin-bottom: 0.5em;
-}
-
-.header .description {
-  margin-bottom: 1em;
 }
 
 /* Tab button styling */
@@ -156,10 +173,12 @@ body {
   flex-wrap: wrap;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
+  font-family: Inter, sans-serif;
 }
 
 .tabs .tablinks {
-  background-color: #f3e5f5;
+  background-color: #051B4C;
+  color: #9B9DB1;
   border: none;
   outline: none;
   cursor: pointer;
@@ -167,15 +186,18 @@ body {
   transition: 0.3s;
   flex: 1 1 auto;
   text-align: center;
+  font-family: Inter, sans-serif;
 }
 
 .tabs .tablinks:hover {
-  background-color: #452c87;
+  background-color: #082F84;
   color: white;
+  font-weight: bold;
 }
 
 .tabs .tablinks.active {
-  background-color: #5e35b1;
+  background-color: #082F84;
+  font-weight: bold;
   color: white;
 }
 
@@ -183,8 +205,10 @@ body {
 .tabcontent {
   display: none;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
+  border-radius: 8px;
   border-top: none;
+  background-color: #fff;
 }
 
 @media (max-width: 600px) {
@@ -212,13 +236,11 @@ body {
 .summary-table {
   width: 100%;
   border-collapse: collapse;
+  color: #051B4CBF;
 }
 .summary-table th, .summary-table td {
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   padding: 8px;
-}
-.summary-table th {
-  background-color: #f2f2f2;
 }
 
 .preview-table {
@@ -227,27 +249,58 @@ body {
   margin: 20px 0;
   font-size: 18px;
   text-align: left;
+  color: #051b4cbf;
+  font-family: Inter, sans-serif;
 }
 
 .preview-table th, .preview-table td {
   padding: 12px 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
 }
 
 .preview-table th {
-  background-color: #f2f2f2;
+  background-color: #051b4c;
+  color: #fff;
 }
 
+#preview-title{
+  color: #051B4C;
+}
+
+#thankyou-msg{
+  color: #051B4C;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
 .hidden {
   display: none;
 }
 
+/* Header styling */
+
 .header {
   color: #fff;
-  padding-top: 30px;
+  padding: 30px 0;
   min-height: 70px;
-  border-bottom: #af95f3 3px solid;
+  border-bottom: #98EB77 3px solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.header .title {
+  font-size: 2em;
+  position: absolute;
+  left: 51%;
+  transform: translateX(-52%);
+  font-family: SharpGrotesk, sans-serif;
+}
+
+.header .logo {
+  width: 150px;
+  height: auto; /* Maintain aspect ratio */
+}
+
 .title {
   text-align: center;
   text-transform: uppercase;
@@ -255,53 +308,55 @@ body {
   font-size: 24px;
 }
 #uploadSection {
-  background: #f3f3f3;
   padding: 30px;
   margin-top: 30px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Inter, sans-serif;
 }
 #uploadButton {
   display: none;
 }
 #uploadLabel {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 9px 20px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  background-color: #5e35b1;
+  background-color: #083085;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 60px;
 }
-#uploadButton:hover {
-  background-color: #452c87;
+#uploadLabel:hover {
+  background-color: #38A70C;
 }
 .default-btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 9px 20px;
   font-size: 16px;
+  font-weight: bold;
+  font-family: Inter, sans-serif;
   cursor: pointer;
-  background-color: #5e35b1;
+  background-color: #083085;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 60px;
 }
 .default-btn:hover {
-  background-color: #452c87;
+  background-color: #38A70C;
 }
 h5 {
   margin: 20px 0;
-  color: #666;
 }
 #previewSection {
   text-align: center;
   margin-top: 20px;
+  font-family: Inter, sans-serif;
 }
 
 #previewContent {
   white-space: pre-wrap;
-  background: #fff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
@@ -324,4 +379,19 @@ table, th, td {
 th, td {
   padding: 8px;
   text-align: left;
+}
+
+#close-btn{
+  display: block;
+  width:180px;
+  padding: 9px 20px;
+  background-color: #38A70C;
+  font-weight: bold;
+  font-family: Inter, sans-serif;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 20px auto; /* This centers the button horizontally */
 }
