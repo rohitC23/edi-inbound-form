@@ -31,14 +31,14 @@ function populateForm(questions, formId) {
             const optionLabel = document.createElement('label');
             const optionInput = document.createElement('input');
             optionInput.type = 'radio';
-            optionInput.name = `question_${question.id}`; // Ensure each question has a unique name
+            optionInput.name = `question_${question.Id}`; // Ensure each question has a unique name
             optionInput.value = option;
-            optionInput.id = `question_${question.id}_option_${index}`;
+            optionInput.id = `question_${question.Id}_option_${index}`;
             optionLabel.htmlFor = optionInput.id;
             optionLabel.textContent = option;
 
             // Pre-select the first option or previously saved option
-            if (index === 0 || (formData[formId] && formData[formId][`question_${question.id}`] === option)) {
+            if (option === question['Canonical Node name'] || (formData[formId] && formData[formId][`question_${question.Id}`] === option)) {
                 optionInput.checked = true;
             }
 
@@ -108,9 +108,6 @@ function openTab(evt, tabName) {
             formId = 'feedbackFormStop';
             break;
         case 'Summary':
-            // Show the save button when opening the Summary tab
-            document.getElementById('save-btn').style.display = 'block';
-            document.getElementById('previewButton').style.display = 'none';
             updateSummary();
             return; // Exit the function early as no form data needs to be fetched
         default:
@@ -196,11 +193,6 @@ function saveSummaryToFile() {
             throw new Error('Network response was not ok');
         }
         return response.json();
-    })
-    .then(data => {
-        // Hide the save button and show the preview button after successfully saving
-        document.getElementById('save-btn').style.display = 'none';
-        document.getElementById('previewButton').style.display = 'block';
     })
     .catch(error => {
         console.error('Error:', error);
@@ -299,13 +291,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const tabs = document.querySelectorAll(".tabcontent");
     const nextButtons = document.querySelectorAll(".next-btn");
     const tabLinks = document.querySelectorAll(".tablinks");
-    const previewButton = document.getElementById('previewButton');
+    const saveButton = document.getElementById('save-btn');
     const backButton = document.getElementById('backButton');
     const previewSection = document.getElementById('previewSection');
     const previewContent = document.getElementById('previewContent');
     const tabsSection = document.getElementById('tabsSection');
     const downloadButton = document.getElementById('download-btn');
     const thankYouMsg = document.getElementById('thankyou-msg');
+    const closeButton = document.getElementById('close-btn');
     const previewTitle = document.getElementById('preview-title');
 
     if (tabs.length > 0) {
@@ -322,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    previewButton.addEventListener('click', async function() {
+    saveButton.addEventListener('click', async function() {
         try {
             const response = await fetch('http://localhost:5000/get/details');
             if (!response.ok) {
@@ -424,9 +417,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 alertBox.style.top = '10px';
                 alertBox.style.left = '50%';
                 alertBox.style.transform = 'translateX(-50%)';
-                alertBox.style.backgroundColor = '#4CAF50';
+                alertBox.style.backgroundColor = '#38A70C';
                 alertBox.style.color = 'white';
-                alertBox.style.padding = '10px';
+                alertBox.style.padding = '15px';
                 alertBox.style.borderRadius = '5px';
                 document.body.appendChild(alertBox);
 
@@ -460,9 +453,9 @@ document.addEventListener("DOMContentLoaded", function() {
             alertBox.style.top = '10px';
             alertBox.style.left = '50%';
             alertBox.style.transform = 'translateX(-50%)';
-            alertBox.style.backgroundColor = '#4CAF50';
+            alertBox.style.backgroundColor = '#38A70C';
             alertBox.style.color = 'white';
-            alertBox.style.padding = '10px';
+            alertBox.style.padding = '15px';
             alertBox.style.borderRadius = '5px';
             document.body.appendChild(alertBox);
             
@@ -478,11 +471,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    document.getElementById('close-btn').addEventListener('click', function() {
+        // Open the current page in a new window
+        var newWindow = window.open(window.location.href, '_self');
+        // Close the new window
+        // newWindow.close();
+    });
+
     downloadButton.addEventListener('click', function() {
         previewTitle.style.display='none';
         previewContent.style.display = 'none';
         backButton.style.display = 'none';
         downloadButton.style.display = 'none';
         thankYouMsg.style.display = 'block';
+        closeButton.style.display = 'block';
     });
 });
