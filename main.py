@@ -12,7 +12,7 @@ CORS(app)
 
 def csv_json(csv_file,json_file):
 
-    headers = ['id', 'X12 Node name', 'X12 Comments', 'Canonical Node name', 'Canonical Comments']
+    headers = ['Id', 'X12 Node name', 'X12 Comments', 'Canonical Node name', 'Canonical Comments']
     final_csv_file = f'{csv_file.split(".")[0]}_0.csv'
 
     i = 0
@@ -42,7 +42,7 @@ def csv_json(csv_file,json_file):
     ordered_data = []
     for item in json_data:
         ordered_item = {
-            'id': item['id'],
+            'Id': item['Id'],
             'X12 Node name': item['X12 Node name'],
             'X12 Comments': item['X12 Comments'],
             'Canonical Node name': item['Canonical Node name'],
@@ -106,7 +106,7 @@ def doc_csv(doc_file):
 @app.route('/default/file', methods=['post'])
 def default_file():
     try:
-        doc_file = 'EDI_204_Default.docx'
+        doc_file = 'EDI_204_def.docx'
         result = doc_csv(doc_file)
         return jsonify({"uploaded_filename": result})
 
@@ -170,115 +170,46 @@ def display_stop():
 
 @app.route('/summary',methods=['post'])
 def generate_file():
-
-    json_file = request.get_json()
-    summary = json_file.get('summary', '')
-    data = json.dumps(json_file)
-
-    with open('file_name.txt','r') as f:
-        filename = f.read()
-    text_file_path = f'{filename}.txt'
-
-    with open(text_file_path, 'w') as file:
-        file.write(summary)
-
-    with open(text_file_path, 'r') as f:
-        data = f.readlines()
-
-    csv_file = f'{text_file_path.split(".")[0]}.csv'
-    final_csv_file = f'{text_file_path.split(".")[0]}_0.csv'
-    i =0
-
-    with open(csv_file, newline='') as in_file, open(final_csv_file, 'w', newline='') as out_file:
-
-        headers = ['id', 'X12 Node name', 'X12 Comments', ' Canonical Node name', ' Canonical Comments']
-        dw = csv.DictWriter(out_file, delimiter=',', fieldnames=headers)
-        dw.writeheader()
-        reader = csv.reader(in_file)
-        next(reader, None)  # Skip the header row
-        for row in reader:
-
-            if row[2] != '' and row[3] != '' and row[4] != '':
-                row[3] = data[i].split(": ")[1].strip()
-                i += 1
-                
-            writer = csv.writer(out_file)
-            writer.writerow(row)
-
-    # json_path = f'{filename}.json'
-    #
-    # headers = ['id', 'X12 Node name', 'X12 Comments', ' Canonical Node name', ' Canonical Comments']
-    #
-    # with open(final_csv_file, newline='') as csvfile:
-    #     reader = csv.DictReader(csvfile, fieldnames=headers)
-    #     data = [row for row in reader]
-    #
-    # with open(json_path, 'w') as jsonfile:
-    #     json.dump(data, jsonfile)
-    #
-    # with open(json_path, "r") as json_file:
-    #     json_data = json.load(json_file)
-    #     for item in json_data:
-    #         if 'X12 Comments' in item:
-    #             item['X12 Comments'] = item['X12 Comments'].split(',')
-    #
-    # ordered_data = []
-    # for item in json_data:
-    #     ordered_item = {
-    #         'id': item['id'],
-    #         'X12 Node name': item['X12 Node name'],
-    #         'X12 Comments': item['X12 Comments'],
-    #         'Canonical Node name': item['Canonical Node name'],
-    #         'Canonical Comments': item['Canonical Comments']
-    #     }
-    #     ordered_data.append(ordered_item)
-    # ordered_data.pop(0)
-    #
-    # # Convert the ordered data to a JSON string
-    # response_data = json.dumps(ordered_data, indent=4)
-    # return response_data
-
-    doc = docx.Document()
-
-    # Open the CSV file
-    with open(final_csv_file, newline='') as f:
-        csv_reader = csv.reader(f)
-
-        # Read the header row
-        csv_headers = next(csv_reader)
-        csv_cols = len(csv_headers)
-
-        # Create a table with the number of columns equal to the headers
-        table = doc.add_table(rows=1, cols=csv_cols)
-
-        # Apply a style to the table that includes borders
-        table.style = 'Table Grid'
-
-        # Add header row to the table
-        hdr_cells = table.rows[0].cells
-        for i in range(csv_cols):
-            hdr_cells[i].text = csv_headers[i]
-
-        # Add data rows to the table
-        for row in csv_reader:
-            row_cells = table.add_row().cells
-            for i in range(csv_cols):
-                row_cells[i].text = row[i]
-
-    # Add a page break (optional)
-    doc.add_page_break()
-
-    file_name = os.path.basename(csv_file).split('.')[0]
-    doc_file = f'{file_name}_final.docx'
     try:
-        # Save the document
-        doc.save(doc_file)
+
+        json_file = request.get_json()
+        summary = json_file.get('summary', '')
+        data = json.dumps(json_file)
+
+        with open('file_name.txt','r') as f:
+            filename = f.read()
+        text_file_path = f'{filename}.txt'
+
+        with open(text_file_path, 'w') as file:
+            file.write(summary)
+
+        with open(text_file_path, 'r') as f:
+            data = f.readlines()
+
+        csv_file = f'{text_file_path.split(".")[0]}.csv'
+        final_csv_file = f'{text_file_path.split(".")[0]}_0.csv'
+        i =0
+
+        with open(csv_file, newline='') as in_file, open(final_csv_file, 'w', newline='') as out_file:
+
+            headers = ['Id', 'X12 Node name', 'X12 Comments', ' Canonical Node name', ' Canonical Comments']
+            dw = csv.DictWriter(out_file, delimiter=',', fieldnames=headers)
+            dw.writeheader()
+            reader = csv.reader(in_file)
+            next(reader, None)  # Skip the header row
+            for row in reader:
+
+                if row[2] != '' and row[3] != '' or row[4] != '':
+                    row[3] = data[i].split(": ")[1].strip()
+                    i += 1
+
+                writer = csv.writer(out_file)
+                writer.writerow(row)
+
         return jsonify({"status":"Generated"})
 
     except Exception as e:
-        os.remove(doc_file)
-        doc.save(doc_file)
-        return jsonify({"status": "Generated"})
+        return jsonify({"error": str(e)})
 
 
 @app.route('/get/details',methods=['get'])
@@ -291,7 +222,7 @@ def get_details():
     # final_csv_path = f'{filename}_final.csv'
     json_path = f'{filename}.json'
 
-    headers = ['id', 'X12 Node name', 'X12 Comments', 'Canonical Node name', 'Canonical Comments']
+    headers = ['Id', 'X12 Node name', 'X12 Comments', 'Canonical Node name', 'Canonical Comments']
 
     with open(csv_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile, fieldnames=headers)
@@ -309,7 +240,7 @@ def get_details():
     ordered_data = []
     for item in json_data:
         ordered_item = {
-            'id': item['id'],
+            'Id': item['Id'],
             'X12 Node name': item['X12 Node name'],
             'X12 Comments': item['X12 Comments'],
             'Canonical Node name': item['Canonical Node name'],
