@@ -9,8 +9,8 @@
 <body>
     <div class="container">
         <div class="header">
+            <img class="logo" src="https://www.echo.com/wp-content/themes/ws/assets/logo.svg">
             <div class="title">EDI 204 Inbound form</div>
-            <div class="description"></div>
         </div>
 
         <div id="uploadSection">
@@ -45,20 +45,19 @@
                 <button type="button" class="next-btn">Next</button>
             </div>
             <div id="Summary" class="tabcontent">
-                <h3>Summary</h3>
                 <p>Preview of your responses</p>
                 <div class="button-container">
-                    <button type="button" id="save-btn" class="submit-btn">Save</button>
-                    <button id="previewButton" class="submit-btn">Preview</button>
+                    <button type="button" id="save-btn" class="submit-btn">Save & Preview</button>
                 </div>
             </div>            
         </div>
         <div id="previewSection" style="display: none;">
-            <h3 id="preview-title">Preview</h3>
+            <h2 id="preview-title">Preview</h2>
             <pre id="previewContent"></pre>
             <button id="backButton">Back</button>
             <button id="download-btn">Download</button>
             <h4 id="thankyou-msg" style="display: none;">Thanks for downloading the file, you're now safe to close the window</h4>
+            <button id="close-btn" style="display: none;">Return to Home</button>
         </div>
     </div>
     <script src="forms.js"></script>
